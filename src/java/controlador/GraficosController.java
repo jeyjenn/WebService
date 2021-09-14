@@ -3,7 +3,6 @@ package controlador;
 import conexion.Conexion;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -37,7 +36,7 @@ public class GraficosController extends HttpServlet {
             ResultSet resultado;
 
             try {
-                iniciar = con.prepareStatement("SELECT fecha_emision, count(id_ventas)FROM ventas GROUP BY fecha_emision ");
+                iniciar = con.prepareStatement("SELECT fecha_emision, count(id_ventas)FROM ventas GROUP BY fecha_emision");
                 resultado = iniciar.executeQuery();
 
                 DefaultCategoryDataset data = new DefaultCategoryDataset();

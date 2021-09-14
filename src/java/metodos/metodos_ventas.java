@@ -28,7 +28,7 @@ public class metodos_ventas {
         PreparedStatement iniciar;
         try {
             Cliente cliente = new Cliente();
-            iniciar = con.prepareStatement("insert into Ventas(id_ventas, cliente_id,fecha_emision,cliente_cedula,cliente_nombres,valor_servicio,numeroSerie  ) values(?,?,?,?,?,?,?)");
+            iniciar = con.prepareStatement("insert into ventas(id_ventas, cliente_id,fecha_emision,cliente_cedula,cliente_nombres,valor_servicio,numeroSerie  ) values(?,?,?,?,?,?,?)");
             iniciar.setInt(1, ve.getId_ventas());
             iniciar.setInt(2, ve.getCliente().getCliente_id());
             iniciar.setDate(3, ve.getFecha_emision());
@@ -52,7 +52,7 @@ public class metodos_ventas {
         ResultSet resultado;
         
          try {
-            iniciar = con.prepareStatement("SELECT MAX(id_ventas)+1 FROM Ventas");
+            iniciar = con.prepareStatement("SELECT MAX(id_ventas)+1 FROM ventas");
             resultado = iniciar.executeQuery();           
             while(resultado.next()){ 
                 idventas =resultado.getString(1);
@@ -70,7 +70,7 @@ public class metodos_ventas {
         ResultSet resultado;
         
          try {
-            iniciar = con.prepareStatement("SELECT MAX(numeroSerie)FROM Ventas");
+            iniciar = con.prepareStatement("SELECT MAX(numeroSerie)FROM ventas");
             resultado = iniciar.executeQuery();           
             while(resultado.next()){ 
                 numeroserie=resultado.getString(1);

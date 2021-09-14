@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import modelo.Cliente;
 import modelo.Servicios;
 
 public class metodos_servicios {
@@ -26,7 +25,7 @@ public class metodos_servicios {
         PreparedStatement iniciar;
         ResultSet resultado;
         try {
-            iniciar = con.prepareStatement("SELECT * FROM Servicios");
+            iniciar = con.prepareStatement("SELECT * FROM servicios");
             resultado = iniciar.executeQuery();
             while (resultado.next()) {
                 Servicios servicios = new Servicios();

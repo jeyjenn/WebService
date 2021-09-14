@@ -29,10 +29,10 @@ public class GenerarSerie {
            numero="000000"+this.dato;
        }
          if((this.dato>=10)&&(this.dato<=100)){
-           numero="0000000"+this.dato;
+           numero="000000"+this.dato;
        }
          if((this.dato<10)){
-           numero="0000000"+this.dato;
+           numero="000000"+this.dato;
        }
         return numero;
     }

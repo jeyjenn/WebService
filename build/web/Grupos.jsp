@@ -8,7 +8,9 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-    <head><!-- sweealert!-->
+    <head>
+         <link rel="icon" type="image/jpg" href="images/logo.jpg">
+        <!-- sweealert!-->
         <link  href="css/sweetalert.css" rel="stylesheet">
         <!-- link de bootrap para los iconos!-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">

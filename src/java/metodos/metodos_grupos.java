@@ -27,7 +27,7 @@ public class metodos_grupos {
         PreparedStatement iniciar;
         ResultSet resultado;
         try {
-            iniciar = con.prepareStatement("SELECT * FROM Grupos");
+            iniciar = con.prepareStatement("SELECT * FROM grupos");
             resultado = iniciar.executeQuery();
             while (resultado.next()) {
                 Grupos grupos = new Grupos();

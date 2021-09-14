@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import metodos.GenerarSerie;
-import metodos.GuardarPDF;
 import metodos.metodos;
 import metodos.metodos_clientes;
 import metodos.metodos_detalleventas;
@@ -89,9 +88,6 @@ public class PrincipalController extends HttpServlet {
     Grupos grupos = new Grupos();
      int cant=1;
      
-     GuardarPDF generar = new GuardarPDF();
-     
-    public static final String destino="C:\\Users\\usuario\\Downloads\\Desktop\\prueba\\hola.pdf";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -365,7 +361,6 @@ public class PrincipalController extends HttpServlet {
 
                         request.setAttribute("mensaje", "venta generada exitosamente");
                         request.setAttribute("tipo", "success");
-                        generar.crearPdf(destino);
                         
                         request.getRequestDispatcher("ImprimirFactura.jsp").forward(request, response);
 
@@ -416,8 +411,7 @@ public class PrincipalController extends HttpServlet {
                         request.setAttribute("mensaje", "datos Guardados Correctamente");
                         request.setAttribute("tipo", "success");
 
-                        // List lista_clientes = mensajero_cliente.Listar_cliente();
-                        //request.setAttribute("clientes", lista_clientes);
+                         request.getRequestDispatcher("Vacio.jsp").forward(request, response);
                     } catch (Exception e) {
 
                         request.setAttribute("mensaje", "Error al guardar los datos");
@@ -674,7 +668,6 @@ public class PrincipalController extends HttpServlet {
                     //mitad de la pantalla
                     List mostrar2 = mensajero_cliente.Listar_por_id(cliente_id);
                     request.setAttribute("documentos", mostrar2);
-
                     request.getRequestDispatcher("Cargar_Documentos.jsp").forward(request, response);
                     break;
 
@@ -764,11 +757,12 @@ public class PrincipalController extends HttpServlet {
                     request.setAttribute("tipo2", "success");
 
                     cliente_docu_id = Integer.parseInt(request.getParameter("codigo_d"));
+                    cliente_doc.setCliente_docu_id(cliente_docu_id);
+                    mensajero_cliente.eliminarDocumento(cliente_doc);
 
                     lista_clientes = mensajero_cliente.Listar_cliente();
                     request.setAttribute("clientes", lista_clientes);
                     request.getRequestDispatcher("MostrarClientes.jsp").forward(request, response);
-
                     break;
 
             }

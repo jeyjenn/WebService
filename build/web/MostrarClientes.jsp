@@ -9,6 +9,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+          <link rel="stylesheet" href="css/estilos.css">
+         <link rel="icon" type="image/jpg" href="images/logo.jpg">
           <!-- sweealert!-->
         <link  href="css/sweetalert.css" rel="stylesheet">
          <!-- link de bootrap para los iconos!-->
@@ -63,7 +65,7 @@
                       
                         <thead>                        
                             <tr>
-                                <th>ACCIONES</th>
+                                <th>--- CLIENTE ------ DIFUNTO</th>
                                 <th>CODIGO</th>
                                 <th>CEDULA</th>
                                 <th>NOMBRE</th>
@@ -75,12 +77,11 @@
                         <tbody id="">
                            <c:forEach var="clientes" items="${clientes}">
                                 <tr> 
-                                    <td><a title="SUBIR" href="PrincipalController?menu=cliente&accion=cargar&txt_codigo=<c:out value ="${clientes.cliente_id}"/>"><i class="btn btn-white bi bi-file-earmark-arrow-up-fill"></i></a>
-                                        <a title="EDITAR" href="PrincipalController?menu=cliente&accion=editar&txt_codigo=<c:out value ="${clientes.cliente_id}"/>"><i class="btn btn-white bi bi-eraser-fill"></i></a>
-                                        <a title="ELIMINAR" href="#" onclick="eliminar_cliente(<c:out value ="${clientes.cliente_id}"/>)"><i class="btn btn-white bi bi-person-x-fill"></i></a>                                   
-                                       
-                                        <a title="CARGAR" href="PrincipalController?menu=difunto&accion=listar&txt_codigo=<c:out value ="${clientes.cliente_id}"/>"><i class="btn btn-white bi bi-card-list"></i></a>
-                                         <a title="ASIGNAR" href="PrincipalController?menu=difunto&accion=cargar_datos_del_cliente&txt_codigo=<c:out value ="${clientes.cliente_id}"/>"><i class="btn btn-white bi bi-person-lines-fill"></i></a>
+                                    <td><a title="SUBIR DOCUMENTO DEL CLIENTE" href="PrincipalController?menu=cliente&accion=cargar&txt_codigo=<c:out value ="${clientes.cliente_id}"/>"><i class="btn btn-warning bi bi-file-earmark-arrow-up-fill"></i></a>
+                                        <a title="EDITAR CLIENTE" href="PrincipalController?menu=cliente&accion=editar&txt_codigo=<c:out value ="${clientes.cliente_id}"/>"><i class="btn btn-warning bi bi-eraser-fill"></i></a>
+                                        <a title="ELIMINAR CLIENTE" href="#" onclick="eliminar_cliente(<c:out value ="${clientes.cliente_id}"/>)"><i class="btn btn-warning bi bi-person-x-fill"></i></a>                                     
+                                        <a title="CARGAR ARCHIVOS DIFUNTO" href="PrincipalController?menu=difunto&accion=listar&txt_codigo=<c:out value ="${clientes.cliente_id}"/>"><i class="btn btn-success bi bi-card-list"></i></a>
+                                        <a title="ASIGNAR DIFUNTO AL CLIENTE" href="PrincipalController?menu=difunto&accion=cargar_datos_del_cliente&txt_codigo=<c:out value ="${clientes.cliente_id}"/>"><i class="btn btn-success bi bi-person-lines-fill"></i></a>
                                     </td>
                                     <td><c:out value ="${clientes.cliente_id}"/></td>
                                     <td><c:out value ="${clientes.cliente_cedula}"/></td>

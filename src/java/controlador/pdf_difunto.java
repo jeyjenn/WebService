@@ -26,16 +26,15 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "pdf_difunto", urlPatterns = {"/pdf_difunto"})
 public class pdf_difunto extends HttpServlet {
 
-   
+  
      
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("application/pdf");
          Connection con;
         
         Conexion conn = new Conexion();
         con = conn.ConectarBD();
-
-    
         
         PreparedStatement iniciar;
         ResultSet resultado;
@@ -55,9 +54,9 @@ public class pdf_difunto extends HttpServlet {
             bos.read(datosPDF,0, tamanoInput);
             
             response.getOutputStream().write(datosPDF);
-            bos.close();
-            iniciar.close();
-            resultado.close();
+//            bos.close();
+//            iniciar.close();
+//            resultado.close();
             
         } catch (Exception e) {
             System.out.println("error al mostrar datos");

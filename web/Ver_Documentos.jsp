@@ -15,6 +15,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        
         <!-- link datatables-->
         <link rel="stylesheet" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
         <!-- sweealert!-->
@@ -54,6 +55,7 @@
                         <th>ACCIONES</th>
                         <th>NOMBRES DEL DOCUMENTO</th>
                         <th>ARCHIVO</th>
+                       
 
                     </tr>
                 </thead>
@@ -62,17 +64,17 @@
                         <tr>
                             <td>
                                 
-                                <a href="#" onclick="eliminar_doc(<c:out value ="${documentos.getCliente_docu_id()}"/>)"><i class="btn btn-white bi bi-person-x-fill"></i></a>
+                                <a title="eliminar" href="#" onclick="eliminar_doc(<c:out value ="${documentos.getCliente_docu_id()}"/>)"><i class="btn btn-white bi bi-person-x-fill"></i></a>
                                 <a href="#" ><i class="bi bi-cloud-download-fill"></i></a>
 
                             </td>
                             <td><c:out value ="${documentos.nombre_docu}"/></td>
                             <td>                          
-                                <a href="pdf?id=${documentos.getCliente_docu_id()}" target="_blank"><i class="bi bi-file-earmark-pdf"></i></a> 
+                                <a title="descargarpdf" href="pdf1?id=${documentos.getCliente_docu_id()}" target="_blank"><i class="bi bi-file-earmark-pdf"></i></a> 
                             </td>
+
                         </tr>
                     </c:forEach>
-
                 </tbody>
             </table>
         </div>

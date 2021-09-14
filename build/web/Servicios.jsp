@@ -9,6 +9,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+         <link rel="icon" type="image/jpg" href="images/logo.jpg">
         <!-- sweealert!-->
         <link  href="css/sweetalert.css" rel="stylesheet">
         <!-- link de bootrap para los iconos!-->
@@ -61,7 +62,7 @@
                         <c:forEach var="s" items="${servicios}">
                             <tr> 
                                 <td><a title="ELIMINAR" href="#" onclick="eliminar_servicio(<c:out value ="${s.id_servicio}"/>)"><i class="btn btn-danger bi bi-person-x-fill"></i></a> 
-                                    <a title="pasar" href="PrincipalController?menu=servicios&accion=pasar&id_servicio=<c:out value ="${s.id_servicio}"/>">ver items</a>
+                                    <a title="pasar" href="PrincipalController?menu=servicios&accion=pasar&id_servicio=<c:out value ="${s.id_servicio}"/>"><i class="btn btn-warning">ver items</i></a>
                                 </td>
                                 <td><c:out value ="${s.cod_servicio}"/></td>
                                 <td><c:out value ="${s.nombre_servicio}"/></td>                            

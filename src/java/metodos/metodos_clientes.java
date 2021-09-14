@@ -137,7 +137,7 @@ public class metodos_clientes {
     public void eliminarCliente(Cliente cliente) {
         PreparedStatement iniciar;
         try {
-            iniciar = con.prepareStatement("delete  from clientes where cliente_id=" + cliente.getCliente_id());
+            iniciar = con.prepareStatement("delete from clientes where cliente_id=" + cliente.getCliente_id());
             iniciar.executeUpdate();
             iniciar.close();
         } catch (SQLException e) {
@@ -149,7 +149,7 @@ public class metodos_clientes {
         public void eliminarDocumento(Cliente_Documento cliente_documento) {
         PreparedStatement iniciar;
         try {
-            iniciar = con.prepareStatement("delete  from docu_clientes where cliente_docu_id=" + cliente_documento.getCliente_docu_id());
+            iniciar = con.prepareStatement("delete from docu_clientes where cliente_docu_id="+cliente_documento.getCliente_docu_id());
             iniciar.executeUpdate();
             iniciar.close();
         } catch (SQLException e) {
@@ -171,7 +171,7 @@ public class metodos_clientes {
                 Cliente cliente = new Cliente();
                 Cliente_Documento cliente_documento = new Cliente_Documento();
                 
-                 cliente_documento.setCliente_docu_id(resultado.getInt(1));
+                cliente_documento.setCliente_docu_id(resultado.getInt(1));
                 cliente.setCliente_id(resultado.getInt(2));
                 cliente_documento.setNombre_docu(resultado.getString(3));
                 cliente_documento.setArchivopdf2(resultado.getBytes(4));
@@ -181,7 +181,6 @@ public class metodos_clientes {
                
             }
             resultado.close();
-
         } catch (SQLException e) {
             System.out.println(e.toString());
         }

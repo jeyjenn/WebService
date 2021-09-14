@@ -9,6 +9,8 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <!-- link datatables-->
+        <link rel="stylesheet" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
         <!-- link de bootrap para los iconos!-->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
         <!--sweetalert-->
@@ -82,14 +84,12 @@
                                 <c:forEach var="d" items="${documentos}">
                                     <tr>
                                         <td>
-
-                                            <a href="#" onclick="eliminar_doc(<c:out value ="${d.getCliente_docu_id()}"/>)"><i class="btn btn-white bi bi-person-x-fill"></i></a>
+                                            <a title="eliminar" href="#" onclick="eliminar_doc(<c:out value ="${d.getCliente_docu_id()}"/>)"><i class="btn btn-white bi bi-person-x-fill"></i></a>
                                             <a href="#" ><i class="bi bi-cloud-download-fill"></i></a>
-
                                         </td>
                                         <td><c:out value ="${d.getCliente_docu_id()}"/></td>
                                         <td><c:out value ="${d.getNombre_docu()}"/></td>
-                                        <td> <a href="pdf?id=${d.getCliente_docu_id()}" target="_blank"><i class="bi bi-file-earmark-pdf"></i></a> </td>
+                                        <td> <a title="descargar" href="pdf?id=${d.getCliente_docu_id()}" target="_blank"><i class="bi bi-file-earmark-pdf"></i></a> </td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
@@ -99,6 +99,7 @@
             </div>
         </div>
     </body>
+  
     <script src="js/sweetalert.min.js"></script>
     <script>
                                                function eliminar_doc(ide1) {
@@ -115,7 +116,7 @@
                                                    },
                                                            function (isConfirm) {
                                                                if (isConfirm) {
-                                                                   window.location = "PrincipalController?menu=cliente&accion=eliminar_documento&codigo_d=" + ide1;
+                                                                   window.location = "PrincipalController?menu=cliente&accion=eliminar_documento&codigo_d="+ide1;
                                                                } else {
                                                                    swal("Cancelado", "tu archivo esta seguro :)", "error");
                                                                }

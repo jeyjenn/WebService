@@ -9,10 +9,10 @@ import conexion.Conexion;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,14 +37,12 @@ public class pdf extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+       
          
         Connection con;
-        
         Conexion conn = new Conexion();
         con = conn.ConectarBD();
-
-    
-        
         PreparedStatement iniciar;
         ResultSet resultado;
         byte[] b=null;
@@ -62,12 +60,13 @@ public class pdf extends HttpServlet {
             byte[] datosPDF = new byte[tamanoInput];
             bos.read(datosPDF,0, tamanoInput);
             
+            response.setContentType("application/pdf");
             response.getOutputStream().write(datosPDF);
             bos.close();
             iniciar.close();
             resultado.close();
             
-        } catch (Exception e) {
+        } catch (IOException | NumberFormatException | SQLException e) {
             System.out.println("error al mostrar datos");
         }
         

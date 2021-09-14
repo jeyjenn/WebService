@@ -58,7 +58,7 @@ public class metodos_materiales {
             Grupos g = new Grupos();
             Servicios s = new Servicios();
            
-            iniciar = con.prepareStatement("insert into Materiales(id_producto , cod_producto ,id_grupo ,id_servicio ,nombre_producto ,precio ,stock   ) values(?,?,?,?,?,?,?)");
+            iniciar = con.prepareStatement("insert into materiales(id_producto , cod_producto ,id_grupo ,id_servicio ,nombre_producto ,precio ,stock   ) values(?,?,?,?,?,?,?)");
             iniciar.setInt(1, m.getId_producto());
             iniciar.setString(2, m.getCod_producto());
             iniciar.setInt(3, m.getGrupos().getId_grupo());

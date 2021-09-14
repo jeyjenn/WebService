@@ -10,6 +10,7 @@
 <!DOCTYPE html>
 <html>
     <head> 
+         <link rel="icon" type="image/jpg" href="images/logo.jpg">
         <!-- alertyfy-->
         <link  href="css/alertify.css" rel="stylesheet">
         <!-- sweealert!-->

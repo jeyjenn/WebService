@@ -9,7 +9,9 @@ public class Conexion {
         public Connection ConectarBD(){
             try {
             Class.forName("com.mysql.jdbc.Driver");
-            Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost/webservice","root","");
+            //Connection conexion = DriverManager.getConnection("jdbc:mysql://node3776-env-9646649.sp.skdrive.net/webservices","root","TDLmfm19122");
+           
+            Connection conexion = DriverManager.getConnection("jdbc:mysql://localhost:3306/webservices","root","");
             System.out.println("conexion exitosa");
             return conexion;
             

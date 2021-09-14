@@ -10,6 +10,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+         <link rel="icon" type="image/jpg" href="images/logo.jpg">
          <!--sweetalert-->
          <link href="css/sweetalert.css" rel="stylesheet">
         <!--estilos css-->

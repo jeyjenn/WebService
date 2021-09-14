@@ -19,9 +19,11 @@
     transform: translate(-50%);
     top:13px;
     background: white;
-    background-size:cover;
+    background-size:contain;
     border: 2px solid rgb(179, 170, 170);
-    background-image: url(../images/jesus.png);
+    background-image: url(../images/logo.jpg);
+    background-repeat: no-repeat;
+    background-position: center;
     
 }
 
@@ -34,10 +36,11 @@
 .mitad2{
     top:90px;
     width: 100%;
-    height: 380px;
+    height: 340px;
     position: absolute;
     border-radius: 8px;
     box-shadow: 0px 0px 1px 1px rgba(58, 56, 56, 0.5);
+    background: white;
 }
 .dentro{
     width: 90%;
@@ -54,19 +57,35 @@
 }
 
 .logo_jesus{
-    background-image: url(../images/jesus.png);
+    width: 50px;
+    height: 50px;
+    background-image: url(../images/trans.png);
     background-size: cover;
-    width: 40px;
-    height: 40px;
+    background-repeat: no-repeat;
+    background-position: center;    
+}
+.logo_principal{
+    background-image: url(../images/alma.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: right; 
+   
 }
 .logo_jesus2{
-     border-radius: 50%;
-    background-image: url(../images/jesus.png);
+    border-radius: 50%;
+    background-image: url(../images/logo.jpg);
     background-size: cover;
     width: 80px;
     height: 80px;
     margin-top: 40px;
 }
+.titulo{
+    color: white;
+    padding-left: 10px;
+}
+
+
+
 
 
 

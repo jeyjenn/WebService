@@ -1,4 +1,8 @@
-
+<%-- 
+    Document   : modal
+    Created on : 13/09/2021, 18:14:26
+    Author     : usuario
+--%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -32,9 +36,4 @@
                         </tbody>
                     </table>
     </body>
-
 </html>
-
-
-
-

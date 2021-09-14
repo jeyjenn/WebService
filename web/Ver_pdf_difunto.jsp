@@ -9,6 +9,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+         <link rel="icon" type="image/jpg" href="images/logo.jpg">
          <!-- link datatables-->
         <link rel="stylesheet" href="//cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css">
         <!--bootstrap-->
@@ -30,7 +31,7 @@
                 <tr>
                     <td><c:out value ="${d.getDifunto_docu_id()}"/></td>
                     <td><c:out value ="${d.getDifunto_nombre_archivo()}"/></td>
-                    <td><a href="pdf_difunto?id=${d.getDifunto_docu_id()}" target="_blank"><i class="bi bi-file-earmark-pdf"></i></a> </td>
+                    <td><a target="_blank" href="pdf_difunto?id=${d.getDifunto_docu_id()}" ><i class="bi bi-file-earmark-pdf"></i></a> </td>
                     
             </tr>
             </c:forEach>

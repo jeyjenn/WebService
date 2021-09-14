@@ -7,14 +7,14 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
-    if (session.getAttribute("Roles") != null) {
+   if (session.getAttribute("Roles") != null) {
 
 %>
 <html>
     <head>
         <!-- sweealert!-->
         <link  href="css/sweetalert.css" rel="stylesheet">
-
+        <link rel="icon" type="image/jpg" href="images/logo.jpg">
         <!--estilos css-->
         <link rel="stylesheet" href="css/estilos.css">
         <!-- link de bootrap para los iconos!-->
@@ -44,15 +44,10 @@
 
         <div> 
             <nav class="navbar navbar-expand-lg navbar-light container-fluid bg-success">
-
                 <div class="d-flex flex-row">
-                    <a  href="PrincipalController?menu=principal"><img class="logo_jesus"> </a> 
-                    <h2>Funenaria "San Jose"</h2>
-
+                    <a  href="PrincipalController?menu=principal"><img class="logo_jesus "> </a> 
+                    <h2 class="titulo">Funenaria "San Jose"</h2>
                 </div>
-
-
-
             </nav>
 
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -116,7 +111,6 @@
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown"> 
                                     <li><a class="dropdown-item" href="GraficosController" target="myframe">Reportes de ventas</a></li>
-                                     <li><a class="dropdown-item" href="exportar.jsp" target="myframe">prueba</a></li>
                                     
                                 </ul>
                             </li>
@@ -127,7 +121,7 @@
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">                                  
                                 <li><a class="dropdown-item" href="#">Cargo: ${Roles.rol_rol}</a></li>
-                                <li><a class="dropdown-item" href="Login.jsp">Salir</a></li>
+                                <li><a class="dropdown-item" href="index.jsp">Salir</a></li>
                             </ul>
                         </div>
                     </div>
@@ -135,9 +129,9 @@
             </nav>
         </div>
 
-        <div class="m-1 bg-white" style="height: 550px;">
-            <iframe name="myframe" style="height: 100%; width: 100%">
-
+        <div class="m-1 bg-white" style="height: 500px;">
+            <iframe class="logo_principal" name="myframe" style="height: 100%; width: 100%">
+               
             </iframe>
         </div>
 
@@ -152,6 +146,6 @@
 </html>
 <%
     } else {
-        response.sendRedirect("Login.jsp");
+        response.sendRedirect("index.jsp");
     }
 %>
