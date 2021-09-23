@@ -55,7 +55,6 @@ public class PrincipalController extends HttpServlet {
 
     List<Materiales> lista1 = new ArrayList<>();
     List<DetalleVentas> lista2 = new ArrayList<>();
-    
 
     Cliente cliente = new Cliente();
     metodos_clientes mensajero_cliente = new metodos_clientes();
@@ -86,14 +85,11 @@ public class PrincipalController extends HttpServlet {
     metodos_detalleventas mdv = new metodos_detalleventas();
 
     Grupos grupos = new Grupos();
-     int cant=1;
-     
+    int cant = 1;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
-        
 
         String accion = request.getParameter("accion");
         String menu = request.getParameter("menu");
@@ -116,10 +112,6 @@ public class PrincipalController extends HttpServlet {
         double totalpagar;
 
         int idv = 1;
-        
-       
-        
-       
 
         String numeroserie;
 
@@ -136,25 +128,44 @@ public class PrincipalController extends HttpServlet {
                     request.getRequestDispatcher("Servicios.jsp").forward(request, response);
                     break;
                 case "eliminar_servicio":
-                  
+
                     int id_servicio = Integer.parseInt(request.getParameter("ser_cod"));
                     servicios.setId_servicio(id_servicio);
                     ms.eliminarServicio(servicios);
-                   
+
                     lista_servicios = ms.Listar_Servicios();
-                    request.setAttribute("servicios", lista_servicios); 
-                    
+                    request.setAttribute("servicios", lista_servicios);
+
                     request.setAttribute("alerta", "datos eliminados correctamente");
                     request.setAttribute("tipo2", "success");
 
                     request.getRequestDispatcher("Servicios.jsp").forward(request, response);
                     break;
-                case "pasar":   
+                case "pasar":
                     id_servicios = Integer.parseInt(request.getParameter("id_servicio"));
                     lista1 = mm.Listar_por_servicio(id_servicios);
                     request.setAttribute("doc", lista1);
-               
-                    request.getRequestDispatcher("modal.jsp").forward(request, response);                  
+
+                    request.getRequestDispatcher("modal.jsp").forward(request, response);
+                    break;
+
+                case "guardar":
+
+                    String cod_serv = request.getParameter("txt_cod");
+                    String nomb_ser = request.getParameter("txt_nombre");
+                    String foto = request.getParameter("txt_foto");
+                    double valor = Double.valueOf(request.getParameter("txt_valor"));
+
+                    servicios.setId_servicio(0);
+                    servicios.setCod_servicio(cod_serv);
+                    servicios.setNombre_servicio(nomb_ser);
+                    servicios.setFoto_servicio(foto);
+                    servicios.setValor_servicio(valor);
+                    ms.insertar_servicio(servicios);
+                    //retorn la vista de la lista de servicios   
+                    lista_servicios = ms.Listar_Servicios();
+                    request.setAttribute("servicios", lista_servicios);
+                    request.getRequestDispatcher("Servicios.jsp").forward(request, response);
                     break;
 
             }
@@ -166,16 +177,16 @@ public class PrincipalController extends HttpServlet {
                     request.setAttribute("grupos", lista_grupos);
                     request.getRequestDispatcher("Grupos.jsp").forward(request, response);
                     break;
-                    
-          case "eliminar_grupo":
-                  
+
+                case "eliminar_grupo":
+
                     int id_grupo = Integer.parseInt(request.getParameter("grupo_cod"));
                     grupos.setId_grupo(id_grupo);
                     mg.eliminarGrupo(grupos);
-                  
+
                     lista_grupos = mg.Listar_Grupos();
                     request.setAttribute("grupos", lista_grupos);
-                    
+
                     request.setAttribute("alerta", "datos eliminados correctamente");
                     request.setAttribute("tipo2", "success");
 
@@ -217,8 +228,7 @@ public class PrincipalController extends HttpServlet {
             }
         }
         if (menu.equals("factura")) {
-            
-         
+
             switch (accion) {
 
                 case "cargar_datos_funeraria":
@@ -250,12 +260,29 @@ public class PrincipalController extends HttpServlet {
                         numeroserie = gs.NumeroSerie(incrementar);
                         request.setAttribute("nserie", numeroserie);
                     }
-                    cedula = request.getParameter("txt_cedula");
-                    cliente = mensajero_cliente.buscar_cedula(cedula);
-                    request.setAttribute("clientes", cliente);
 
-                    request.setAttribute("servicios", ms.Listar_Servicios());
-                    request.getRequestDispatcher("Factura.jsp").forward(request, response);
+                    cedula = request.getParameter("txt_cedula");
+                    cliente = mensajero_cliente.validar_cedula(cedula);
+                    if (cliente.getCliente_cedula() != null) {
+
+                        try {
+                            cedula = request.getParameter("txt_cedula");
+                            cliente = mensajero_cliente.buscar_cedula(cedula);
+                            request.setAttribute("clientes", cliente);
+
+                            request.setAttribute("servicios", ms.Listar_Servicios());
+                            request.getRequestDispatcher("Factura.jsp").forward(request, response);
+
+                        } catch (Exception e) {
+
+                        }
+
+                    } else {
+                        request.setAttribute("mensaje", "la cedula ingresada no existe");
+                        request.setAttribute("tipo", "error");
+                        request.getRequestDispatcher("Factura.jsp").forward(request, response);
+
+                    }
                     break;
 
                 case "cargar1":
@@ -295,7 +322,6 @@ public class PrincipalController extends HttpServlet {
                 case "nueva_venta":
 
                     try {
-                          
 
                         String cliente_cedula = request.getParameter("txt_cedula");
                         cliente_id = Integer.parseInt(request.getParameter("txt_codigo"));
@@ -321,12 +347,11 @@ public class PrincipalController extends HttpServlet {
                         //cojo el codigo para guaedar
                         id_servicios = Integer.parseInt(request.getParameter("id_servicio"));
                         //Guardar Detalle ventas
-                     
-                 
-                        for (int i = 0; i < lista1.size(); i++) {    
-                            
+
+                        for (int i = 0; i < lista1.size(); i++) {
+
                             detalleventas = new DetalleVentas();
-                            
+
                             detalleventas.setId_detalleventas(0);
                             ventas.setId_ventas(idv);
                             servicios.setId_servicio(id_servicios);
@@ -335,7 +360,7 @@ public class PrincipalController extends HttpServlet {
                             materiales.setNombre_producto(lista1.get(i).getNombre_producto());
                             materiales.setPrecio(lista1.get(i).getPrecio());
                             detalleventas.setCant(cant);
-                            
+
                             detalleventas.setVentas(ventas);
                             detalleventas.setServicios(servicios);
                             detalleventas.setMateriales(materiales);
@@ -361,11 +386,25 @@ public class PrincipalController extends HttpServlet {
 
                         request.setAttribute("mensaje", "venta generada exitosamente");
                         request.setAttribute("tipo", "success");
-                        
+
                         request.getRequestDispatcher("ImprimirFactura.jsp").forward(request, response);
 
                     } catch (Exception e) {
-                        request.getRequestDispatcher("Vacio.jsp").forward(request, response);
+
+                        //numero serie
+                        numeroserie = mv.GenerarSerie();
+                        if (numeroserie.isEmpty()) {
+                            numeroserie = "00000001";
+                            request.setAttribute("nserie", numeroserie);
+                        } else {
+                            int incrementar = Integer.parseInt(numeroserie);
+                            GenerarSerie gs = new GenerarSerie();
+                            numeroserie = gs.NumeroSerie(incrementar);
+                            request.setAttribute("nserie", numeroserie);
+                        }
+                        request.setAttribute("mensaje", "debe ingresar datos");
+                        request.setAttribute("tipo", "error");
+                        request.getRequestDispatcher("Factura.jsp").forward(request, response);
                     }
                     break;
 
@@ -411,7 +450,7 @@ public class PrincipalController extends HttpServlet {
                         request.setAttribute("mensaje", "datos Guardados Correctamente");
                         request.setAttribute("tipo", "success");
 
-                         request.getRequestDispatcher("Vacio.jsp").forward(request, response);
+                        request.getRequestDispatcher("Vacio.jsp").forward(request, response);
                     } catch (Exception e) {
 
                         request.setAttribute("mensaje", "Error al guardar los datos");
@@ -438,6 +477,8 @@ public class PrincipalController extends HttpServlet {
                     request.getRequestDispatcher("Guardar_doc_difunto.jsp").forward(request, response);
                     break;
                 case "guardar":
+                    
+                    
                     difunto_id = Integer.parseInt(request.getParameter("txt_codigo"));
 
                     String nombre_archvio = request.getParameter("txt_nombre");
@@ -469,6 +510,12 @@ public class PrincipalController extends HttpServlet {
 
                     request.setAttribute("mensaje", "datos Guardados Correctamente");
                     request.setAttribute("tipo", "success");
+                    
+                   
+                       
+                    lista_difunto = difuntodao.Listar_por_id__difunto(cliente_id);
+                    request.setAttribute("documentos", lista_difunto);
+                    
                     request.getRequestDispatcher("CargarDocu_difunto.jsp").forward(request, response);
                     break;
                 case "listar_pdf":
@@ -501,75 +548,57 @@ public class PrincipalController extends HttpServlet {
                     break;
 
                 case "guardar":
-                    rol_nombres = request.getParameter("txt_nombre");
-                    roles = mensajero.validar_cedula(rol_nombres);
-                    if (roles.getRol_nombres() != null) {
 
-                        try {
+                    try {
 
-                            request.setAttribute("mensaje", "la cedula ingresada ya existe");
-                            request.setAttribute("tipo", "error");
-                            //muestra el ultimo codigo generado
-                            ultimoCodigo = mensajero.GenerarCodigo();
-                            request.setAttribute("lista", ultimoCodigo);
-                            request.getRequestDispatcher("NuevoEmpleado.jsp").forward(request, response);
+                        rol_id = Integer.parseInt(request.getParameter("txt_codigo"));
+                        rol_nombres = request.getParameter("txt_nombre");
+                        rol_usuario = request.getParameter("txt_usuario");
+                        rol_contraseña = request.getParameter("txt_pass");
+                        rol_estado = request.getParameter("seleccion_estado");
+                        rol_rol = request.getParameter("seleccion_rol");
 
-                        } catch (Exception e) {
-
+                        if (rol_nombres.equals("")) {
+                            throw new Exception("debe ingresar nombres");
                         }
 
-                    } else {
-                        try {
-
-                            rol_id = Integer.parseInt(request.getParameter("txt_codigo"));
-                            rol_nombres = request.getParameter("txt_nombre");
-                            rol_usuario = request.getParameter("txt_usuario");
-                            rol_contraseña = request.getParameter("txt_pass");
-                            rol_estado = request.getParameter("seleccion_estado");
-                            rol_rol = request.getParameter("seleccion_rol");
-
-                            if (rol_nombres.equals("")) {
-                                throw new Exception("debe ingresar nombres");
-                            }
-
-                            if (rol_usuario.equals("")) {
-                                throw new Exception("debe ingresar usuarios");
-                            }
-                            if (rol_contraseña.equals("")) {
-                                throw new Exception("debe ingresar contraseña");
-                            }
-                            if (rol_estado.equals("")) {
-                                throw new Exception("debe seleccionar estado");
-                            }
-                            if (rol_rol.equals("")) {
-                                throw new Exception("debe seleccionar rol");
-                            }
-
-                            roles.setRol_id(rol_id);
-                            roles.setRol_nombres(rol_nombres);
-                            roles.setRol_usuario(rol_usuario);
-                            roles.setRol_contraseña(rol_contraseña);
-                            roles.setRol_estado(rol_estado);
-                            roles.setRol_rol(rol_rol);
-                            mensajero.insertar(roles);
-
-                            request.setAttribute("mensaje", "datos guardados correctamente");
-                            request.setAttribute("tipo", "success");
-                            //muestra el ultimo codigo generado
-                            ultimoCodigo = mensajero.GenerarCodigo();
-                            request.setAttribute("lista", ultimoCodigo);
-                            request.getRequestDispatcher("Vacio.jsp").forward(request, response);
-
-                        } catch (Exception e) {
-                            request.setAttribute("mensaje", "debe ingresar datos");
-                            request.setAttribute("tipo", "error");
-                            //muestra el ultimo codigo generado
-                            ultimoCodigo = mensajero.GenerarCodigo();
-                            request.setAttribute("lista", ultimoCodigo);
-                            request.getRequestDispatcher("NuevoEmpleado.jsp").forward(request, response);
+                        if (rol_usuario.equals("")) {
+                            throw new Exception("debe ingresar usuarios");
+                        }
+                        if (rol_contraseña.equals("")) {
+                            throw new Exception("debe ingresar contraseña");
+                        }
+                        if (rol_estado.equals("")) {
+                            throw new Exception("debe seleccionar estado");
+                        }
+                        if (rol_rol.equals("")) {
+                            throw new Exception("debe seleccionar rol");
                         }
 
+                        roles.setRol_id(rol_id);
+                        roles.setRol_nombres(rol_nombres);
+                        roles.setRol_usuario(rol_usuario);
+                        roles.setRol_contraseña(rol_contraseña);
+                        roles.setRol_estado(rol_estado);
+                        roles.setRol_rol(rol_rol);
+                        mensajero.insertar(roles);
+
+                        request.setAttribute("mensaje", "datos guardados correctamente");
+                        request.setAttribute("tipo", "success");
+                        //muestra el ultimo codigo generado
+                        ultimoCodigo = mensajero.GenerarCodigo();
+                        request.setAttribute("lista", ultimoCodigo);
+                        request.getRequestDispatcher("Vacio.jsp").forward(request, response);
+
+                    } catch (Exception e) {
+                        request.setAttribute("mensaje", "debe ingresar datos");
+                        request.setAttribute("tipo", "error");
+                        //muestra el ultimo codigo generado
+                        ultimoCodigo = mensajero.GenerarCodigo();
+                        request.setAttribute("lista", ultimoCodigo);
+                        request.getRequestDispatcher("NuevoEmpleado.jsp").forward(request, response);
                     }
+
                     break;
 
                 case "editar":
@@ -617,40 +646,58 @@ public class PrincipalController extends HttpServlet {
                     request.getRequestDispatcher("NuevoCliente.jsp").forward(request, response);
                     break;
                 case "guardar":
-                    try {
-                        String cliente_cedula = request.getParameter("txt_cedula");
-                        String cliente_nombres = request.getParameter("txt_nombre");
-                        String cliente_telefono = request.getParameter("txt_telefono");
-                        String cliente_correo = request.getParameter("txt_correo");
+                    String cliente_cedula1 = request.getParameter("txt_cedula");
+                    cliente = mensajero_cliente.validar_cedula(cliente_cedula1);
+                    if (cliente.getCliente_cedula() != null) {
 
-                        if (cliente_nombres.equals("")) {
-                            throw new Exception("debe ingresar nombres");
-                        }
-                        if (cliente_cedula.length() <= 9 || cliente_cedula.length() >= 11) {
-                            throw new Exception("debe ingresar una cedula valida");
-                        }
-                        if (cliente_telefono.length() <= 9 || cliente_telefono.length() >= 11) {
-                            throw new Exception("debe ingresar un telefono valido");
+                        try {
+
+                            request.setAttribute("mensaje", "la cedula ingresada ya existe");
+                            request.setAttribute("tipo", "error");
+
+                            request.getRequestDispatcher("NuevoCliente.jsp").forward(request, response);
+
+                        } catch (Exception e) {
+
                         }
 
-                        if (cliente_correo.equals("")) {
-                            throw new Exception("debe ingresar un correo");
+                    } else {
+
+                        try {
+                            String cliente_cedula = request.getParameter("txt_cedula");
+                            String cliente_nombres = request.getParameter("txt_nombre");
+                            String cliente_telefono = request.getParameter("txt_telefono");
+                            String cliente_correo = request.getParameter("txt_correo");
+
+                            if (cliente_nombres.equals("")) {
+                                throw new Exception("debe ingresar nombres");
+                            }
+                            if (cliente_cedula.length() <= 9 || cliente_cedula.length() >= 11) {
+                                throw new Exception("debe ingresar una cedula valida");
+                            }
+                            if (cliente_telefono.length() <= 9 || cliente_telefono.length() >= 11) {
+                                throw new Exception("debe ingresar un telefono valido");
+                            }
+
+                            if (cliente_correo.equals("")) {
+                                throw new Exception("debe ingresar un correo");
+                            }
+                            cliente.setCliente_id(0);
+                            cliente.setCliente_cedula(cliente_cedula);
+                            cliente.setCliente_nombres(cliente_nombres);
+                            cliente.setCliente_telefono(cliente_telefono);
+                            cliente.setCliente_correo(cliente_correo);
+                            mensajero_cliente.insertar_cliente(cliente);
+
+                            request.setAttribute("mensaje", "datos guardados correctamente");
+                            request.setAttribute("tipo", "success");
+                            request.getRequestDispatcher("Vacio.jsp").forward(request, response);
+
+                        } catch (Exception e) {
+                            request.setAttribute("mensaje", e.getMessage());
+                            request.setAttribute("tipo", "error");
+                            request.getRequestDispatcher("NuevoCliente.jsp").forward(request, response);
                         }
-                        cliente.setCliente_id(0);
-                        cliente.setCliente_cedula(cliente_cedula);
-                        cliente.setCliente_nombres(cliente_nombres);
-                        cliente.setCliente_telefono(cliente_telefono);
-                        cliente.setCliente_correo(cliente_correo);
-                        mensajero_cliente.insertar_cliente(cliente);
-
-                        request.setAttribute("mensaje", "datos guardados correctamente");
-                        request.setAttribute("tipo", "success");
-                        request.getRequestDispatcher("Vacio.jsp").forward(request, response);
-
-                    } catch (Exception e) {
-                        request.setAttribute("mensaje", e.getMessage());
-                        request.setAttribute("tipo", "error");
-                        request.getRequestDispatcher("NuevoCliente.jsp").forward(request, response);
                     }
                     break;
 

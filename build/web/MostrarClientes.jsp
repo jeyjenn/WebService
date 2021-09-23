@@ -57,7 +57,7 @@
         %>
        
                 <form>
-                    <div class="container">
+                    <div class="">
                        
             <div>
                 <div>
@@ -65,7 +65,7 @@
                       
                         <thead>                        
                             <tr>
-                                <th>--- CLIENTE ------ DIFUNTO</th>
+                                <th>ACCIONES</th>
                                 <th>CODIGO</th>
                                 <th>CEDULA</th>
                                 <th>NOMBRE</th>
@@ -77,7 +77,7 @@
                         <tbody id="">
                            <c:forEach var="clientes" items="${clientes}">
                                 <tr> 
-                                    <td><a title="SUBIR DOCUMENTO DEL CLIENTE" href="PrincipalController?menu=cliente&accion=cargar&txt_codigo=<c:out value ="${clientes.cliente_id}"/>"><i class="btn btn-warning bi bi-file-earmark-arrow-up-fill"></i></a>
+                                    <td class="d-flex flex-row"><a title="SUBIR DOCUMENTO DEL CLIENTE" href="PrincipalController?menu=cliente&accion=cargar&txt_codigo=<c:out value ="${clientes.cliente_id}"/>"><i class="btn btn-warning bi bi-file-earmark-arrow-up-fill"></i></a>
                                         <a title="EDITAR CLIENTE" href="PrincipalController?menu=cliente&accion=editar&txt_codigo=<c:out value ="${clientes.cliente_id}"/>"><i class="btn btn-warning bi bi-eraser-fill"></i></a>
                                         <a title="ELIMINAR CLIENTE" href="#" onclick="eliminar_cliente(<c:out value ="${clientes.cliente_id}"/>)"><i class="btn btn-warning bi bi-person-x-fill"></i></a>                                     
                                         <a title="CARGAR ARCHIVOS DIFUNTO" href="PrincipalController?menu=difunto&accion=listar&txt_codigo=<c:out value ="${clientes.cliente_id}"/>"><i class="btn btn-success bi bi-card-list"></i></a>
@@ -85,7 +85,7 @@
                                     </td>
                                     <td><c:out value ="${clientes.cliente_id}"/></td>
                                     <td><c:out value ="${clientes.cliente_cedula}"/></td>
-                                    <td><c:out value ="${clientes.cliente_nombres}"/></td>
+                                    <td class="w-25"><c:out value ="${clientes.cliente_nombres}"/></td>
                                     <td><c:out value ="${clientes.cliente_telefono}"/></td>
                                     <td><c:out value ="${clientes.cliente_correo}"/></td>
                                 </tr>

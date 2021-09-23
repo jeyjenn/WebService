@@ -54,8 +54,8 @@
                                     <tr>
                                         <td>
 
-                                            <a href="PrincipalController?menu=difunto&accion=cargar&txt_codigo_difunto=<c:out value ="${d.getDifunto_id()}"/>"><i class="bi bi-folder-plus"></i></a>
-                                            <a href="PrincipalController?menu=difunto&accion=listar_pdf&txt_codigo_difunto=<c:out value ="${d.getDifunto_id()}"/>"><i class="bi bi-card-checklist"></i></a>
+                                            <a title="cargar archivos" href="PrincipalController?menu=difunto&accion=cargar&txt_codigo_difunto=<c:out value ="${d.getDifunto_id()}"/>"><i class="bi bi-folder-plus"></i></a>
+                                            <a title="ver archivos subidos" href="PrincipalController?menu=difunto&accion=listar_pdf&txt_codigo_difunto=<c:out value ="${d.getDifunto_id()}"/>"><i class="bi bi-card-checklist"></i></a>
                                         </td>
                                          <td><c:out value ="${d.getDifunto_id()}"/></td>
                                         <td><c:out value ="${d.getCliente().getCliente_id()}"/></td>

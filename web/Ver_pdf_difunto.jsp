@@ -21,11 +21,12 @@
     </head>
     <body>
         <div class="container">
+             <div class="card-header text-center bg-light">arvhivos subidos del difunto</div>
              <table id="documento" class="table table-sm  table-hover">
             <tr>
-                <td>cod</td>
-                <td>nombre</td>
-                <td>archivo</td>
+                <td class="bg-info">cod</td>
+                <td class="bg-info">nombre</td>
+                <td class="bg-info">archivo</td>
             </tr>
             <c:forEach var="d" items="${pdf}">
                 <tr>

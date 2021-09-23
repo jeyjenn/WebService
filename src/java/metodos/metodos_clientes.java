@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import modelo.Cliente;
 import modelo.Cliente_Documento;
 import modelo.Roles;
@@ -212,6 +214,28 @@ public class metodos_clientes {
             return null;
         }
         return c; 
+    }
+        
+     public Cliente validar_cedula(String cedula) {
+        PreparedStatement iniciar;
+        ResultSet resultado;
+        Cliente cliente = new Cliente();
+        try {
+            iniciar = con.prepareStatement("SELECT * FROM clientes where cliente_cedula=?");
+
+            iniciar.setString(1, cedula);
+
+            resultado = iniciar.executeQuery();
+
+            if (resultado.next()) {
+                cliente.setCliente_cedula(resultado.getString("cliente_cedula"));
+            }
+            resultado.close();
+        } catch (SQLException ex) {
+
+            Logger.getLogger(metodos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return cliente;
     }
 
 }

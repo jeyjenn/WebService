@@ -110,8 +110,10 @@
                                     Reportes
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown"> 
-                                    <li><a class="dropdown-item" href="GraficosController" target="myframe">Reportes de ventas</a></li>
-                                    
+                                    <li><a class="dropdown-item" href="GraficosController?menu=barras" target="myframe">Reportes de ventas</a></li>
+                                    <li><a class="dropdown-item" href="GraficosController?menu=torta" target="myframe">Reportes de ventas</a></li>
+                                     <li><a class="dropdown-item" href="Facturapdf.jsp" target="myframe">listado de clientes</a></li>
+                                     <li><a class="dropdown-item" href="Buscar_factura.jsp" target="myframe">buscar factura</a></li>
                                 </ul>
                             </li>
                         </ul>

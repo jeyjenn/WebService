@@ -45,22 +45,20 @@
 
                                 <div class="col-md-12 mb-2">
                                     <label>Codigo del producto</label>
-                                    <input class="form-control" name="txt_codigo"  type="text" >
+                                    <input class="form-control" name="txt_codigo"  type="text" required="" >
                                 </div>
                                 <div class="col-md-12 mb-2">
                                     <label>NOMBRES del producto</label>
-                                    <input class="form-control" name="nombre_producto" type="text"  placeholder="Ingrese sus nombres Completos">
+                                    <input class="form-control" name="nombre_producto" type="text"  placeholder="Ingrese sus nombres Completos" required="">
                                 </div>
                                 <div class="col-md-12 mb-2">
                                     <label>precio</label>
-                                    <input class="form-control" name="txt_precio" type="text"  placeholder="Ingrese su nombre de usuario">
+                                    <input class="form-control" name="txt_precio" type="text"  placeholder="Ingrese su nombre de usuario" required="">
                                 </div>
                                 <div class="col-md-12 mb-2">
                                     <label>stock</label>
-                                    <input class="form-control" name="txt_stock" type="text" placeholder="Ingrese su contraseña">
+                                    <input class="form-control" name="txt_stock" type="text" placeholder="Ingrese su contraseña" required="">
                                 </div>
-
-
                             </div>
                         </div>
                         <button type="submit" name="guardar" class="btn btn-success mt-4 w-100">guardar</button>

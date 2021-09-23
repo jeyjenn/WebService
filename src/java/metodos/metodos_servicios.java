@@ -55,5 +55,25 @@ public class metodos_servicios {
             System.out.println("error al mostrar datos");
         }
     }
+     
+       public int insertar_servicio(Servicios ser) {
+        PreparedStatement iniciar;
+        try {
+            iniciar = con.prepareStatement("insert into servicios(id_servicio,cod_servicio,nombre_servicio, foto_servicio, valor_servicio) values(?,?,?,?,?)");
+            iniciar.setInt(1, ser.getId_servicio());
+            iniciar.setString(2, ser.getCod_servicio());
+            iniciar.setString(3, ser.getNombre_servicio());
+            iniciar.setString(4, ser.getFoto_servicio());
+            iniciar.setDouble(5, ser.getValor_servicio());
+
+            iniciar.executeUpdate();
+            System.out.println("datos guardados correctamente");
+            iniciar.close();
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+            System.out.println("error al guardar los datos");
+        }
+        return r;
+    }
 
 }

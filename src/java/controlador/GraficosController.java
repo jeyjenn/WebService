@@ -12,10 +12,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.jfree.chart.ChartFactory;
+//import org.jfree.chart.ChartUtils;
 import org.jfree.chart.ChartUtilities;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 
 @WebServlet(name = "GraficosController", urlPatterns = {"/GraficosController"})
 public class GraficosController extends HttpServlet {
@@ -24,34 +26,74 @@ public class GraficosController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
 
-        response.setContentType("image/JPEG");
-        OutputStream out = response.getOutputStream();
-        
-        try {
-            Connection con;
-            Conexion conn = new Conexion();
-            con = conn.ConectarBD();
+        String menu = request.getParameter("menu");
 
-            PreparedStatement iniciar;
-            ResultSet resultado;
+        if (menu.equals("barras")) {
+
+            response.setContentType("image/JPEG");
+            OutputStream out = response.getOutputStream();
 
             try {
-                iniciar = con.prepareStatement("SELECT fecha_emision, count(id_ventas)FROM ventas GROUP BY fecha_emision");
-                resultado = iniciar.executeQuery();
+                Connection con;
+                Conexion conn = new Conexion();
+                con = conn.ConectarBD();
 
-                DefaultCategoryDataset data = new DefaultCategoryDataset();
-                while (resultado.next()) {
-                    data.setValue(resultado.getInt(2), "VENTAS", resultado.getString(1));
+                PreparedStatement iniciar;
+                ResultSet resultado;
+
+                try {
+                    iniciar = con.prepareStatement("SELECT fecha_emision, count(id_ventas)FROM ventas GROUP BY fecha_emision");
+                    resultado = iniciar.executeQuery();
+
+                    DefaultCategoryDataset data = new DefaultCategoryDataset();
+                    while (resultado.next()) {
+                        data.setValue(resultado.getInt(2), resultado.getString(1), resultado.getString(1));
+                    }
+                    JFreeChart grafico2 = ChartFactory.createBarChart("VENTAS DIARIAS", "DIAS", "RANGO", data, PlotOrientation.VERTICAL, true, true, true);
+
+                    ChartUtilities.writeChartAsPNG(out, grafico2, 400, 400);
+                    request.getRequestDispatcher("Vacio.jsp").forward(request, response);
+
+                } catch (Exception ex) {
                 }
-                JFreeChart grafico2 = ChartFactory.createBarChart("VENTAS MENSUALES", "MES", "VALOR", data, PlotOrientation.VERTICAL, true, true, true);
-              
-                ChartUtilities.writeChartAsPNG(out, grafico2, 400, 400);
-                request.getRequestDispatcher("Vacio.jsp").forward(request, response);
-           
-            } catch (Exception ex) {
+
+            } catch (Exception e) {
             }
 
-        } catch (Exception e) {
+        }
+
+        if (menu.equals("torta")) {
+            response.setContentType("image/JPEG");
+            OutputStream out = response.getOutputStream();
+
+            try {
+                Connection con;
+                Conexion conn = new Conexion();
+                con = conn.ConectarBD();
+
+                PreparedStatement iniciar;
+                ResultSet resultado;
+
+                try {
+                    iniciar = con.prepareStatement("SELECT fecha_emision, count(id_ventas)FROM ventas GROUP BY fecha_emision");
+                    resultado = iniciar.executeQuery();
+
+                    DefaultPieDataset data = new DefaultPieDataset();
+                    while (resultado.next()) {
+                        data.setValue(resultado.getString(1), resultado.getInt(2));
+
+                    }
+                    JFreeChart grafico2 = ChartFactory.createPieChart("VENTAS DIARIAS", data, true, true, true);
+
+                    ChartUtilities.writeChartAsPNG(out, grafico2, 400, 400);
+                    request.getRequestDispatcher("Vacio.jsp").forward(request, response);
+
+                } catch (Exception ex) {
+                }
+
+            } catch (Exception e) {
+            }
+
         }
 
     }

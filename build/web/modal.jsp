@@ -8,11 +8,15 @@
 <!DOCTYPE html>
 <html>
     <head>
+         <!--bootstrap-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">  
          <link href="css/sweetalert.css" rel="stylesheet">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
         <body>
+            <div class="container">
+                 <div class="card-header text-center bg-light">items por servicio</div>
                     <table id="servicios" class="table table-sm  table-hover w-100">
                         <thead>                        
                             <tr>
@@ -35,5 +39,6 @@
                             </c:forEach>
                         </tbody>
                     </table>
+                </div>
     </body>
 </html>

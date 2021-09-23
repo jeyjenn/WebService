@@ -35,10 +35,13 @@ public class pdf extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
+      
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-       
+       response.setContentType("application/pdf");
          
         Connection con;
         Conexion conn = new Conexion();
@@ -46,7 +49,10 @@ public class pdf extends HttpServlet {
         PreparedStatement iniciar;
         ResultSet resultado;
         byte[] b=null;
+       
         try {
+           
+          
             int doc_id = Integer.parseInt(request.getParameter("id"));
             iniciar = con.prepareStatement("select archivopdf from docu_clientes where cliente_docu_id=?");
             iniciar.setInt(1, doc_id);
@@ -60,11 +66,12 @@ public class pdf extends HttpServlet {
             byte[] datosPDF = new byte[tamanoInput];
             bos.read(datosPDF,0, tamanoInput);
             
-            response.setContentType("application/pdf");
+            
             response.getOutputStream().write(datosPDF);
-            bos.close();
-            iniciar.close();
-            resultado.close();
+           
+           bos.close();
+           iniciar.close();
+           resultado.close();
             
         } catch (IOException | NumberFormatException | SQLException e) {
             System.out.println("error al mostrar datos");

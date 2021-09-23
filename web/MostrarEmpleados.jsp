@@ -61,7 +61,7 @@
         <%
             }
         %>
-        <div class="container">
+        <div class="">
         <form>
             <div>
                 <div>

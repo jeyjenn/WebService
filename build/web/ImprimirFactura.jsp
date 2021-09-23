@@ -41,7 +41,14 @@
             String hoy = LocalDate.now().toString();
         %>
         <div class="container">
-            <a href="PrincipalController?menu=factura&accion=imprimir" onclick="print()">imprimir</a>          
+          
+             <div class="card-header bg-light">generar factura</div>
+             <form action="ReporteFactura.jsp" target="_blank">
+                   <input hidden="" type="text" name="txt_parametro" size="10" value="${ns}"/>
+                  <button type="submit" name="guardar" class="btn btn-success mt-4 w-25">GENERAR PDF DE LA FACTURA</button>
+            </form>
+             <br>
+             <br>
             <div class=" form-control">
                 <div class="d-flex  justify-content-around text-center">
                     <div>

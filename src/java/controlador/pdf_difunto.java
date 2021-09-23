@@ -54,9 +54,9 @@ public class pdf_difunto extends HttpServlet {
             bos.read(datosPDF,0, tamanoInput);
             
             response.getOutputStream().write(datosPDF);
-//            bos.close();
-//            iniciar.close();
-//            resultado.close();
+            bos.close();
+            iniciar.close();
+            resultado.close();
             
         } catch (Exception e) {
             System.out.println("error al mostrar datos");
