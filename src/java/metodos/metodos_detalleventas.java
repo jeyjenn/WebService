@@ -27,7 +27,7 @@ public class metodos_detalleventas {
             Servicios servicios = new Servicios();
             Materiales materiales = new  Materiales();
             
-            iniciar = con.prepareStatement("insert into detalleVentas(id_detalleventas, id_ventas, id_servicio , id_producto ,nombre_producto ,precio, cant ) values(?,?,?,?,?,?,?)");
+            iniciar = con.prepareStatement("insert into detalleventas(id_detalleventas, id_ventas, id_servicio , id_producto ,nombre_producto ,precio, cant ) values(?,?,?,?,?,?,?)");
             iniciar.setInt(1, ve.getId_detalleventas());
             iniciar.setInt(2, ve.getVentas().getId_ventas());
             iniciar.setInt(3, ve.getServicios().getId_servicio());

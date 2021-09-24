@@ -89,10 +89,6 @@ where ventas.`id_ventas` = $P{vari_facrura}]]>
 			<rectangle radius="10">
 				<reportElement x="313" y="0" width="242" height="99" uuid="1253df29-d35f-4497-a56a-bb71994b56d7"/>
 			</rectangle>
-			<image>
-				<reportElement x="14" y="12" width="106" height="73" uuid="0886aab9-e14a-49b9-a69e-db07d22948cb"/>
-				<imageExpression><![CDATA["C:\\Users\\usuario\\Downloads\\Desktop\\Documents\\NetBeansProjects\\WebService\\web\\images\\alma.jpg"]]></imageExpression>
-			</image>
 			<staticText>
 				<reportElement x="86" y="44" width="223" height="20" uuid="ffa8a9ad-4768-44ce-9c19-df1f05b0c8a1"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle"/>

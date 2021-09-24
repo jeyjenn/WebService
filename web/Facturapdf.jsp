@@ -13,6 +13,7 @@
 <%@page import="net.sf.jasperreports.view.JasperViewer"%>
 <%@page import="javax.servlet.ServletResponse"%>
 <%@page import="conexion.Conexion"%>
+<%@include file="Buscar_factura.jsp"%>
 
 <!DOCTYPE html>
 <html>
@@ -29,6 +30,10 @@
        
        File repotFile = new File (application.getRealPath("Reporte.jasper"));
        Map<String, Object> parameter = new HashMap<String, Object>();
+       
+       //String valor = request.getParameter("txt_parametro");
+       //parameter.put("cedula",new String(valor));
+       
        byte[] bytes = JasperRunManager.runReportToPdf(repotFile.getPath(), parameter, con);
              
        response.setContentType("application/pdf");

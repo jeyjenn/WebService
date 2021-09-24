@@ -3,7 +3,10 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<queryString language="SQL">
+	<parameter name="cedula" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
 		<![CDATA[SELECT
      clientes.`cliente_id` AS clientes_cliente_id,
      clientes.`cliente_cedula` AS clientes_cliente_cedula,
@@ -11,7 +14,8 @@
      clientes.`cliente_telefono` AS clientes_cliente_telefono,
      clientes.`cliente_correo` AS clientes_cliente_correo
 FROM
-     `clientes` clientes]]>
+     `clientes` clientes
+]]>
 	</queryString>
 	<field name="clientes_cliente_id" class="java.lang.Integer"/>
 	<field name="clientes_cliente_cedula" class="java.lang.String"/>
